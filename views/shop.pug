@@ -3,11 +3,16 @@ block styles
         link(rel="stylesheet", href="/css/shop.css")
 block content
     main 
-        h1 My products
-        p List Of All Products
-        each product in products
+        if products.length > 0 
+            h1 My products
+            each product in products
+                p
+                     b #{ product.title }
+        else 
             p
-                b #{ product.title }
+                h1 No products
+        
+     
         
 
 

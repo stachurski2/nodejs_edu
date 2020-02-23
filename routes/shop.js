@@ -6,7 +6,7 @@ const adminData = require('../routes/admin.js');
 
  Router.get('/', (req,res,next) => {   
     const products = adminData.products;
-    res.render("shop",{ products, docTitle: 'Shop' });
+    res.render("shop",{ products, pageTitle: 'Shop', path:'/'});
 });
 
 
