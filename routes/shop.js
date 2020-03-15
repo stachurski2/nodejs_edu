@@ -9,8 +9,7 @@ const adminData = require('../routes/admin.js');
     res.render("shop",{ hasProducts: (products.length > 0),
                         prods: products, 
                         pageTitle: 'Shop',
-                        path:'/',
-                        shopActive: true});
+                        path:'/');
 });
 
 module.exports = Router;
