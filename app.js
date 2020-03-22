@@ -2,11 +2,12 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const product = require('./model/product.js');
 const app = express();
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const rootDir = require('./utils/path');
+const error404 = require('./controllers/controller404')
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, "public")));
@@ -16,8 +17,6 @@ app.set('views','views');
 app.use('/admin',adminData.routes);
 app.use(shopRoutes);
 
-app.use('/', (req,res,next) => {   
-  res.status(404).render('404', { pageTitle: 'Page Not Found sdmaskdksa' });
-});
+app.use(error404.get404error);
 
 app.listen(process.env.PORT || 3000);
