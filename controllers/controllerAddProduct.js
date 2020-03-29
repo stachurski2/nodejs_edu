@@ -1,3 +1,4 @@
+const fs = require('fs')
 const product = require('../model/product');
 
 exports.getAddProduct = (req, res, next) => {
@@ -9,7 +10,8 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-    product.addProduct(req.body.title);
+    let newProduct = new product(req.body.title);
+    newProduct.save();
     res.redirect('/');
 };
 
