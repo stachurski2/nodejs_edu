@@ -6,6 +6,7 @@ const addProductController = require('../controllers/controllerAddProduct')
 
 const products = [];
 router.get('/add-product', addProductController.getAddProduct);
+router.get('/products', addProductController.getProducts);
 
 router.post('/add-product', addProductController.postAddProduct);
 

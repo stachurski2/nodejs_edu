@@ -9,6 +9,10 @@ exports.getAddProduct = (req, res, next) => {
                             });
 };
 
+exports.getProducts = (req, res, next) => {
+    res.render('404',{ pageTitle: "xxx", path: "/admin/products" });
+};
+
 exports.postAddProduct = (req, res, next) => {
     let newProduct = new product(req.body.title);
     newProduct.save();

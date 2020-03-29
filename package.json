@@ -4,7 +4,8 @@
   "description": "My first server app",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
     "start-server": "node app.js"
   },
   "author": "Stachu",
@@ -16,8 +17,6 @@
     "body-parser": "^1.19.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "express-handlebars": "^3.1.0",
-    "pub": "^0.2.0",
-    "pug": "^2.0.4"
+    "express-handlebars": "^3.1.0"
   }
 }
