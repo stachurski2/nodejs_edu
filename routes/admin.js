@@ -9,5 +9,5 @@ router.get('/add-product', addProductController.getAddProduct);
 router.get('/products', addProductController.getProducts);
 
 router.post('/add-product', addProductController.postAddProduct);
-
+router.post('/delete-product', addProductController.postDeleteProduct);
 exports.routes = router

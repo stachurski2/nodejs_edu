@@ -1,4 +1,6 @@
+
 const path = require('path');
+const uuid = require('uuid').v4;
 const fs = require('fs');
 const ownPath = path.join(path.dirname(process.mainModule.filename),'data','products.json');
 
@@ -12,9 +14,23 @@ function getProductsFile(callback) {
     });
 }
 
+function deleteProduct(productUUID, callback) {
+    getProductsFile((products => {
+        var newProducts = products.filter(function(product) {
+            return product.uuid != productUUID;
+        })
+        fs.writeFile(ownPath, JSON.stringify(newProducts), (err) => {});
+        callback();
+    }))
+}
+
 module.exports = class Product {
-    constructor(title) {
+    constructor(title, descripton, imageLink, price) {
+        this.uuid =  uuid()
         this.title = title;
+        this.descripton = descripton;
+        this.imageLink = imageLink;
+        this.price = price;
     };
 
     save() {
@@ -26,6 +42,10 @@ module.exports = class Product {
 
     static getProducts(callback) {
          getProductsFile(callback);
+    }
+
+    static deleteProduct(productUUID,callback ) {
+        deleteProduct(productUUID, callback);
     }
 }
 

@@ -13,7 +13,6 @@ exports.getIndex =  (req,res,next) => {
 exports.getProducts =  (req,res,next) => {   
    console.log("getProducts");
    res.status(404).render('404', { pageTitle: 'Page Not Found', path: '/products' });
-
 };
 
 exports.getCart = (req,res,next) => {   

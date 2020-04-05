@@ -1,6 +1,6 @@
 const fs = require('fs')
 const product = require('../model/product');
-
+ 
 exports.getAddProduct = (req, res, next) => {
     res.render('addProduct', {
                               pageTitle: 'Add Product', 
@@ -10,13 +10,26 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-    res.render('404',{ pageTitle: "xxx", path: "/admin/products" });
+    product.getProducts((products => {
+    res.render("productList" ,{ pageTitle: "productList",
+                                prods: products,
+                                path: "/admin/products" });
+    }))
 };
 
 exports.postAddProduct = (req, res, next) => {
-    let newProduct = new product(req.body.title);
+    let newProduct = new product(req.body.title, 
+                                 req.body.description, 
+                                 req.body.imageLink,
+                                 req.body.price);
     newProduct.save();
     res.redirect('/');
+};
+
+exports.postDeleteProduct = (req, res, nest) => {
+    product.deleteProduct(req.body.uuid, ( value => {
+        res.redirect('/');
+    }))
 };
 
 exports.products = product.getProducts;
