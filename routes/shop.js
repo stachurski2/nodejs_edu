@@ -5,10 +5,11 @@ const rootDir = require('../utils/path')
 const adminData = require('../routes/admin.js');
 const shopController = require('../controllers/controllerShop.js');
 
-
  router.get('/', shopController.getIndex);
 
  router.get('/products', shopController.getProducts);
+
+ router.get('/products/:productId', shopController.getProduct)
  
  router.get('/cart', shopController.getCart);
  

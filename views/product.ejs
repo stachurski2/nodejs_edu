@@ -1,0 +1,23 @@
+<head>
+    <%- include('includes/head.ejs') %>
+</head>
+<body>
+    <%-  include('includes/navigation.ejs') %>
+    <main class="centered">
+
+        <% if( product) { %>
+           <h1>  <%= product.title %> </h1>
+        <hr>
+             <div>
+                <img class="details__img" src=<%= product.imageLink %> > 
+            </div>
+        <hr>  
+        <h2> <%= product.price %> $</h2>  
+            <p> 
+                <%=  product.descripton %>
+            </p>
+        <% } else { %>
+            Didn't find a product.
+        <% } %>
+    </main>
+</body>

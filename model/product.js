@@ -13,6 +13,18 @@ function getProductsFile(callback) {
         callback(products);
     });
 }
+function getProduct(identifer, successCallback) {
+    fs.readFile(ownPath,(err, fileContent) => {
+        let products = [];
+        if(!err) {
+            products = JSON.parse(fileContent)
+        }
+  
+         successCallback(products.filter(function(product) {
+            return product.uuid == identifer
+         })[0]);
+    });
+}
 
 function deleteProduct(productUUID, callback) {
     getProductsFile((products => {
@@ -26,10 +38,10 @@ function deleteProduct(productUUID, callback) {
 
 module.exports = class Product {
     constructor(title, descripton, imageLink, price) {
-        this.uuid =  uuid()
+        this.uuid = uuid()
         this.title = title;
         this.descripton = descripton;
-        this.imageLink = imageLink;
+        this.imageLink = imageLink
         this.price = price;
     };
 
@@ -43,6 +55,12 @@ module.exports = class Product {
     static getProducts(callback) {
          getProductsFile(callback);
     }
+
+
+    static getProduct(identifier ,successCallback) {
+        getProduct(identifier, successCallback);
+   }
+
 
     static deleteProduct(productUUID,callback ) {
         deleteProduct(productUUID, callback);

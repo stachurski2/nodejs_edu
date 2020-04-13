@@ -141,3 +141,11 @@ body {
       margin: 0 0.25rem;
   }
   
+  .centered {
+    text-align: center;
+  }
+
+  .details__img {
+    max-height: 800px;
+    max-width: 600px;
+  }

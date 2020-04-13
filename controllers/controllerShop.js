@@ -31,4 +31,12 @@ exports.getCart = (req,res,next) => {
     console.log("checkout");
     res.status(404).render('404', { pageTitle: 'Page Not Found', path: '/checkout' });
  };
+
+ exports.getProduct = (req, res, next) => {
+ const prodId = req.params.productId;
+  var didFind = false; 
+    product.getProduct(prodId, (product) => {
+      res.render('product', { pageTitle: 'Product', path: '/product/id', product: product });
+    });
+ };
  
