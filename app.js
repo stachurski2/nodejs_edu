@@ -6,6 +6,8 @@ const product = require('./model/product.js');
 const app = express();
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+const cartRoutes = require('./routes/cart');
+
 const rootDir = require('./utils/path');
 const error404 = require('./controllers/controller404')
 
@@ -16,6 +18,7 @@ app.set('views','views');
 
 app.use('/admin',adminData.routes);
 app.use(shopRoutes);
+app.use(cartRoutes);
 
 app.use(error404.get404error);
 
