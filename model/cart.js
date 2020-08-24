@@ -12,7 +12,6 @@ function addProduct(product, cart) {
 function removeProduct(product, cart, index, callback) {
     let array = new Array();
     for (var i = 0; i < cart.products.length; i++) {
-       console.log(i);       
        if((i == index && cart.products[i].uuid == product.uuid) == false ) {
              let newProduct = new Product()
              newProduct.uuid = product.uuid

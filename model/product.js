@@ -1,6 +1,5 @@
-
 const path = require('path');
-const uuid = require('uuid').v4;
+const uuid = require('uuidv4');
 const fs = require('fs');
 const Product = require('./product')
 const ownPath = path.join(path.dirname(process.mainModule.filename),'data','products.json');

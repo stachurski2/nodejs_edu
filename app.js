@@ -7,7 +7,7 @@ const app = express();
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const cartRoutes = require('./routes/cart');
-
+const database = require('./utils/database');
 const rootDir = require('./utils/path');
 const error404 = require('./controllers/controller404')
 
@@ -15,6 +15,14 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, "public")));
 app.set('view engine', 'ejs');
 app.set('views','views');
+
+database.execute('SELECT * FROM sys.products')
+.then( (result) => {
+    console.log(result);
+})
+.catch( err => {
+    console.log(err);
+});
 
 app.use('/admin',adminData.routes);
 app.use(shopRoutes);
