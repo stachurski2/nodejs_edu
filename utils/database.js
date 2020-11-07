@@ -17,12 +17,12 @@ const sequelize = new Sequelize('dba8an906tqv84','iizceyljgdhacn','708f9f1c55ba9
 class Database {
 
     static startRun(successCallback, failureCallBack) {
-        let Product = require('../model/product.js');
-        let User = require('../model/user.js');
-        let Cart = require('../model/cart.js');
-        let cardItem = require('../model/CartItem.js');
-        let Order = require('../model/order.js');
-        let OrderItem = require('../model/orderItem.js');
+        let Product = require('../model/product');
+        let User = require('../model/user');
+        let Cart = require('../model/cart');
+        let cardItem = require('../model/cartItem');
+        let Order = require('../model/order');
+        let OrderItem = require('../model/orderItem');
         Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE'});
         User.hasMany(Product);
         User.hasOne(Cart);
