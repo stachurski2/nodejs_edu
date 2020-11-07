@@ -18,11 +18,11 @@ class Database {
 
     static startRun(successCallback, failureCallBack) {
         let Product = require('../model/product');
-        let User = require('../model/user');
         let Cart = require('../model/cart');
         let cardItem = require('../model/cartItem');
         let Order = require('../model/order');
         let OrderItem = require('../model/orderItem');
+        let User = require('../model/user');
         Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE'});
         User.hasMany(Product);
         User.hasOne(Cart);
