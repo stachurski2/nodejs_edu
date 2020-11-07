@@ -18,7 +18,7 @@
                     </h1>
                     </header>
                     <div class="card__image">
-                        <img src=<%=product.imageLink%>>
+                        <img src=<%=product.imageURL%>>
                     </div>
                     <div class="card__content">
                         <h2 class="product__price">
@@ -30,7 +30,7 @@
                     </div>
                     <div class="card__actions">
                             <form action="/admin/delete-product" method="POST">
-                                <input type="hidden" name="uuid" value=<%=encodeURIComponent(product.uuid)%> /> 
+                                <input type="hidden" name="uuid" value=<%=encodeURIComponent(product.id)%> /> 
                                  <button class="btn">Remove Product</button>
                             </form>
                     </div>

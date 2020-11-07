@@ -10,26 +10,46 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-    product.getProducts((products => {
-    res.render("productList" ,{ pageTitle: "productList",
-                                prods: products,
-                                path: "/admin/products" });
-    }))
+    req.user.getProducts()
+    .then( products => {
+    res.render("productList", { pageTitle: "productList",
+                                    prods: products,
+                                    path: "/admin/products" });
+    }).catch( error => {
+        res.render("unknownError");
+    })
 };
 
 exports.postAddProduct = (req, res, next) => {
-    let newProduct = new product(req.body.title, 
-                                 req.body.description, 
-                                 req.body.imageLink,
-                                 req.body.price);
-    newProduct.save();
-    res.redirect('/');
+     req.user.createProduct({ 
+        title: req.body.title,
+        price: req.body.price,
+        imageURL: req.body.imageLink,
+        description: req.body.description
+     }).then( function (product) {
+        if (product) {
+           res.redirect('/admin/products');
+        } else {
+            res.render('unknownError',{ pageTitle: 'Database error', path: '/unknownError' } );
+        }
+    }).catch( err => {
+        res.render('unknownError',{ pageTitle: 'Database error', path: '/unknownError' } );
+
+    })
 };
 
 exports.postDeleteProduct = (req, res, nest) => {
-    product.deleteProduct(req.body.uuid, ( value => {
-        res.redirect('/');
-    }))
+    const prodId = req.body.uuid;
+  var didFind = false; 
+
+   product.destroy( {
+       where: {
+        id: prodId
+       }
+   }).then( () => {
+     res.redirect('/');
+   }).catch( err => {
+        res.render('unknownError',{ pageTitle: 'Database error', path: '/unknownError' } );
+    })
 };
 
-exports.products = product.getProducts;

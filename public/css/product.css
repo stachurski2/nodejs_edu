@@ -20,6 +20,12 @@
     margin-bottom: 0.5rem;
 }
 
+.product__quantity {
+    text-align: center;
+    color: #cec5c5;
+    font-size: 0.8em;
+}
+
 .product__description {
     text-align: center;
 }

@@ -5,6 +5,7 @@ const rootDir = require('../utils/path')
 const adminData = require('../routes/admin.js');
 const shopController = require('../controllers/controllerShop.js');
 const cartController = require('../controllers/controllerCart.js');
+const databaseErrorController =  require('../controllers/controllerDatabaseError'); 
 
  router.get('/', shopController.getIndex);
 
@@ -13,9 +14,10 @@ const cartController = require('../controllers/controllerCart.js');
  router.get('/products/:productId', shopController.getProduct);
  
  router.get('/cart', cartController.getCart);
- 
- router.get('/orders', shopController.getOrders);
- 
+  
  router.get('/checkout', shopController.getCheckout);
+
+ router.get('/unknownError', databaseErrorController.getDatabaseError);
+
 
 module.exports = router;

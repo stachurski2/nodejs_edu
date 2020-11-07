@@ -9,12 +9,12 @@
            <h1>  <%= product.title %> </h1>
         <hr>
              <div>
-                <img class="details__img" src=<%= product.imageLink %> > 
+                <img class="details__img" src=<%= product.imageURL %> > 
             </div>
         <hr>  
         <h2> <%= product.price %> $</h2>  
             <p> 
-                <%=  product.descripton %>
+                <%=  product.description %>
             </p>
         <% } else { %>
             Didn't find a product.
