@@ -9,7 +9,7 @@ const cartRoutes = require('./routes/cart');
 const database = require('./utils/database');
 const rootDir = require('./utils/path');
 const error404 = require('./controllers/controller404');
-const User = require('./model/user');
+const User = require('./model/User');
 
 
 app.use(bodyParser.urlencoded({extended: false}));
