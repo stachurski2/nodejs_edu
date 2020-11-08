@@ -11,10 +11,10 @@ exports.getCart = (req,res,next) => {
             let cart = req.user.createCart();
             let cartProducts = cart.getProducts()
 
-            res.render('Cart', { pageTitle: 'Cart', path: '/cart', cartProducts: cartProducts });
+            res.render('cart', { pageTitle: 'Cart', path: '/cart', cartProducts: cartProducts });
         } else {
              cart.getProducts().then( cartProducts => {
-                res.render('Cart', { pageTitle: 'Cart', path: '/cart', cartProducts: cartProducts });
+                res.render('cart', { pageTitle: 'Cart', path: '/cart', cartProducts: cartProducts });
             });
         }
     }).catch( err => {
