@@ -18,8 +18,8 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
+    "mongodb": "^3.6.3",
     "mysql2": "^2.2.5",
-    "sequelize": "^4.44.4",
     "pg": "^8.4.2",
     "uuidv4": "^6.2.3"
   }

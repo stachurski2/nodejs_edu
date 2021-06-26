@@ -29,8 +29,10 @@
                         </p>
                     </div>
                     <div class="card__actions">
+                            <a href="/admin/edit-product/?id=<%= product._id %>&edit=true" class="btn">Edit</a>
+                            <br>
                             <form action="/admin/delete-product" method="POST">
-                                <input type="hidden" name="uuid" value=<%=encodeURIComponent(product.id)%> /> 
+                                <input type="hidden" name="id" value=<%= product._id.toHexString() %> >
                                  <button class="btn">Remove Product</button>
                             </form>
                     </div>

@@ -11,9 +11,9 @@ router.get('/getCart', cartController.getCart)
 
 router.post('/removeProductFromCart', cartController.removeProductFromCart)
 
-router.post('/create-order', cartController.createOrder)
+// router.post('/create-order', cartController.createOrder)
 
-router.get('/orders', cartController.getOrders)
+// router.get('/orders', cartController.getOrders)
 
 router.get('/unknownError', databaseErrorController.getDatabaseError);
 

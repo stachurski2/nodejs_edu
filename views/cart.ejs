@@ -39,7 +39,7 @@
                     <% let index = cartProducts.indexOf(product) %>
                     <div class="card__actions">
                         <form action="/removeProductFromCart" method="post">
-                            <input type="hidden" name="productId" value=<%= product.id %>>
+                            <input type="hidden" name="productId" value=<%= product._id.toHexString() %>>
                             <input type="hidden" name="index" value=<%= index %>>
                             <input type="hidden" name="quantity" value=<%= 1 %>>
                             <button class="btn" type="submit">Remove one from cart</button>

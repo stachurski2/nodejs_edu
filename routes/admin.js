@@ -7,9 +7,11 @@ const databaseErrorController =  require('../controllers/controllerDatabaseError
 const products = [];
 router.get('/add-product', addProductController.getAddProduct);
 router.get('/products', addProductController.getProducts);
+router.get('/edit-product', addProductController.editProduct);
 
 router.post('/add-product', addProductController.postAddProduct);
 router.post('/delete-product', addProductController.postDeleteProduct);
+router.post('/edit-product', addProductController.postEditProduct);
 
 router.get('/unknownError', databaseErrorController.getDatabaseError);
 

@@ -1,55 +1,68 @@
 const fs = require('fs')
-const product = require('../model/product');
+const Product = require('../model/product');
  
-exports.getAddProduct = (req, res, next) => {
-    res.render('addProduct', {
-                              pageTitle: 'Add Product', 
-                              path: '/admin/add-product',
-                              addProductActive: true
-                            });
-};
+class ControllerAddProduct {
 
-exports.getProducts = (req, res, next) => {
-    req.user.getProducts()
-    .then( products => {
-    res.render("productList", { pageTitle: "productList",
-                                    prods: products,
-                                    path: "/admin/products" });
-    }).catch( error => {
-        res.render("unknownError");
-    })
-};
+    static getAddProduct = (req, res, next) => {
+        res.render('addProduct', {
+                                pageTitle: 'Add Product', 
+                                path: '/admin/add-product',
+                                addProductActive: true
+                                });
+    };
 
-exports.postAddProduct = (req, res, next) => {
-     req.user.createProduct({ 
-        title: req.body.title,
-        price: req.body.price,
-        imageURL: req.body.imageLink,
-        description: req.body.description
-     }).then( function (product) {
-        if (product) {
-           res.redirect('/admin/products');
-        } else {
+    static getProducts = (req, res, next) => {
+        req.user.getProducts().then(products => {
+        res.render("productList", { pageTitle: "productList",
+                                        prods: products,
+                                        path: "/admin/products" }); 
+        });
+    };
+
+    static postAddProduct = (req, res, next) => {
+        let product = new Product(req.body.title, req.body.price, req.body.description, req.body.imageLink, req.user._id);
+        product.save().then(result => {
+            ControllerAddProduct.getProducts(req, res, next);
+        }).catch( error => {
             res.render('unknownError',{ pageTitle: 'Database error', path: '/unknownError' } );
-        }
-    }).catch( err => {
-        res.render('unknownError',{ pageTitle: 'Database error', path: '/unknownError' } );
+        });
+    };
 
-    })
-};
 
-exports.postDeleteProduct = (req, res, nest) => {
-    const prodId = req.body.uuid;
-  var didFind = false; 
+    static postEditProduct = (req, res, next) => {
+        const prodId = req.body['id'];
+        let modifiedProduct = new Product(req.body.title, req.body.price, req.body.description, req.body.imageLink, req.user._id, prodId)
+        modifiedProduct.save().then( result => {
+            ControllerAddProduct.getProducts(req, res, next);
+        }).catch( error => {
+            res.render('unknownError',{ pageTitle: 'Database error', path: '/unknownError' } );
+        });
+    };
 
-   product.destroy( {
-       where: {
-        id: prodId
-       }
-   }).then( () => {
-     res.redirect('/');
-   }).catch( err => {
-        res.render('unknownError',{ pageTitle: 'Database error', path: '/unknownError' } );
-    })
-};
+    static editProduct = (req, res, next) => {
+        const prodId = req.query['id'];
+        Product.getProduct(prodId).then(product => {
+            if(product) {
+                console.log(product)
+                res.render('editProduct', {
+                    pageTitle: 'Edit Product', 
+                    path: '/admin/editProduct',
+                    product: product
+                });
+            } else {
+                res.render('unknownError',{ pageTitle: 'Database error', path: '/unknownError' } );
+            }
+        });
+    };
 
+
+    static postDeleteProduct = (req, res, next) => {
+        const prodId = req.body.id;
+        Product.deleteProduct(prodId).then(result => {
+            ControllerAddProduct.getProducts(req, res, next);
+        });
+    };
+
+}
+
+module.exports = ControllerAddProduct;
